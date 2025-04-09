@@ -5,18 +5,35 @@
 
     <div class="col-6 mx-auto">
 
-     
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
 
-        <input [(ngModel)]="author.name" type="text" class="form-control m-1" placeholder="name">
-        <input [(ngModel)]="author.lastname" type="text" class="form-control m-1" placeholder="lastname">
-        <input [(ngModel)]="author.email" type="text" class="form-control m-1" placeholder="email">
-        <input [(ngModel)]="author.password" type="password" class="form-control m-1" placeholder="password">
+        <input formControlName="name" id="name" type="text" class="form-control m-1" placeholder="name" required>
+        <div *ngIf="name.invalid && name.touched">
+            <small *ngIf="name.errors?.['required']" class="text-danger m-2">Name is required.</small>
+        </div>
+       
+        <input formControlName="lastname" type="text" class="form-control m-1" placeholder="lastname">
+        <div *ngIf="lastname.invalid && lastname.touched">
+            <small *ngIf="lastname.errors?.['required']" class="text-danger m-2">Last name is required.</small>
+        </div>
+
+        <input formControlName="email" type="text" class="form-control m-1" placeholder="email">
+        <div *ngIf="email.invalid && email.touched">
+            <small *ngIf="email.errors?.['required']" class="text-danger m-2">Email is required.</small>
+            <small *ngIf="email.errors?.['email']" class="text-danger m-2">Please enter a valid email.</small>
+        </div>
+
+        <input formControlName="password" type="password" class="form-control m-1" placeholder="password">
+        <div *ngIf="password.invalid && password.touched">
+            <small *ngIf="password.errors?.['required']" class="text-danger m-2">Password is required.</small>
+        </div>
+
         <input type="file" (change)="select($event)" class="form-control m-1" placeholder="image">
-        <textarea [(ngModel)]="author.about" name="" id="" cols="30" rows="4" placeholder="about" class="form-control m-1" ></textarea>
+        <textarea formControlName="about" name="" id="" cols="30" rows="4" placeholder="about" class="form-control m-1" ></textarea>
 
-        <button (click)="register()" class="btn btn-dark form-control m-1">Register</button>
+        <button type="submit" class="btn btn-dark form-control m-1" [disabled]="registerForm.invalid">Register</button>
 
-
+    </form>
     </div>
 
 </div>
