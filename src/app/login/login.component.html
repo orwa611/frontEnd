@@ -4,15 +4,25 @@
     <h2 class="text-center"> Login to author account </h2>
 
     <div class="col-6 mx-auto">
-
+        <div *ngIf="errorMessage">
+            <small class="text-danger m-2"> {{errorMessage}} </small>
+        </div>
      
 
+    <form [formGroup]="loginForm">
+        <input formControlName="email" type="text" class="form-control m-1" placeholder="email">
+        <div *ngIf="email.invalid && email.touched">
+            <small *ngIf="email.errors?.['required']" class="text-danger m-2">Email is required.</small>
+            <small *ngIf="email.errors?.['email']" class="text-danger m-2">Please enter a valid email.</small>
+        </div>
 
-        <input [(ngModel)]="login.email" type="text" class="form-control m-1" placeholder="email">
-        <input [(ngModel)]="login.password" type="password" class="form-control m-1" placeholder="password">
-      
-        <button (click)="loginAction()" class="btn btn-dark form-control m-1">Login</button>
+        <input formControlName="password" type="password" class="form-control m-1" placeholder="password">
+        <div *ngIf="password.invalid && password.touched">
+            <small *ngIf="password.errors?.['required']" class="text-danger m-2">Password is required.</small>
+        </div>
 
+        <button (click)="loginAction()" [disabled]="loginForm.invalid" class="btn btn-dark form-control m-1">Login</button>
+    </form>
 
     </div>
 
