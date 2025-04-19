@@ -2,7 +2,6 @@ export interface Author {
     name: string;
     lastname: string;
     email: string;
-    password: string;
+    image: string;
     about: string | undefined;
-
 }

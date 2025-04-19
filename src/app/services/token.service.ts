@@ -19,4 +19,7 @@ export class TokenService {
   deleteToken(): void {
     localStorage.removeItem(this.key);
   }
+  getToken(): string | null {
+   return localStorage.getItem(this.key);
+  }
 }
