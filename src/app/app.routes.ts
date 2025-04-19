@@ -8,19 +8,20 @@ import { AuthorComponent } from './author/author.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { authGuardConnected, authGuardDisconnected } from './guards/auth.guard';
 
 export const routes: Routes = [
 
     { path: '' , redirectTo: '/home' , pathMatch: 'full'},
     { path: 'home' , component: HomeComponent},
     { path: 'article/:id' , component: DetailComponent},
-    { path: 'create' , component: CreateArticleComponent},
+    { path: 'create' , component: CreateArticleComponent, canActivate:[authGuardConnected]},
     { path: 'about' , component: AboutComponent},
 
     { path: 'privacy' , component: PrivacyComponent},
-    { path: 'author' , component: AuthorComponent},
-    { path: 'login' , component: LoginComponent},
-    { path: 'register' , component: RegisterComponent},
+    { path: 'author' , component: AuthorComponent, canActivate:[authGuardConnected]},
+    { path: 'login' , component: LoginComponent, canActivate:[authGuardDisconnected]},
+    { path: 'register' , component: RegisterComponent, canActivate:[authGuardDisconnected]},
 
     { path: '**' , component: NotFoundComponent},
 
