@@ -10,4 +10,13 @@ export class TokenService {
   saveToken(token: string) {
     localStorage.setItem(this.key, token);
   }
+
+  isTokenExist(): boolean {
+   let value = localStorage.getItem(this.key)
+    return value != null && value != "";
+  }
+  
+  deleteToken(): void {
+    localStorage.removeItem(this.key);
+  }
 }
