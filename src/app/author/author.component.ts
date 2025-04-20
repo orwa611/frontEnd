@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { MyAccountService } from '../services/my-account.service';
 import { Author } from '../interfaces/author';
+import { baseUrl, getImageUrl } from '../../constants/constants';
 
 @Component({
   selector: 'app-author',
@@ -19,6 +20,10 @@ export class AuthorComponent implements OnInit {
       this.isLoading = false;
       this.author = value;
     });
+  }
+  get image() {
+   return getImageUrl(this.author?.image);
+    
   }
   
 }
