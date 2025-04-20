@@ -47,7 +47,7 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.get('about')!;
   }
  
-  image : any;
+  image: any;
 
   select(e:any){
     this.image = e.target.files[0];

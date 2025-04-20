@@ -2,32 +2,36 @@
 
 
     <h2 class="text-center"> Create article  </h2>
-
+   
     <div class="col-6 mx-auto">
+        <div *ngIf="success"  class="p-3 mb-2 bg-success text-white">Article created successfully !</div>
+        <div *ngIf="error"  class="p-3 mb-2 bg-danger text-white">Article not created!</div>
+        <form [formGroup]="articleForm" (ngSubmit)="addArticle()">
 
-     
-
-        <input  type="text" class="form-control m-1" placeholder="title">
-        <ul>
-            <li > tag </li>
-        </ul>
+            <input formControlName="title" id="title" type="text" class="form-control m-1" placeholder="Title" required>
+            <div *ngIf="title.invalid && title.touched">
+                <small *ngIf="title.errors?.['required']" class="text-danger m-2">Title is required.</small>
+            </div>
+        
+            <span *ngFor = 'let tag of tags' class="badge rounded-pill bg-secondary ms-1" (click)="removeTag(tag)"> {{tag}} </span>
+        
         <div class="row m-1" >
-            <input  type="text" class="form-control w-75" placeholder="tag"> 
-            <button class="btn btn-dark w-25"  >Add</button>
+            <input formControlName="tag" type="text" class="form-control w-75" placeholder="tag"> 
+            <button class="btn btn-dark w-25" (click)="addTags()" type="button">Add</button>
     
         </div>
      
-        <input type="file"  class="form-control m-1" placeholder="image">
-        <textarea  title="" id="" cols="30" rows="4" placeholder="description" class="form-control m-1" ></textarea>
+        <input type="file" (change)="select($event)" class="form-control m-1" placeholder="image">
 
-        <div class="m-1">
-         <textarea  [placeholder]="'Enter text here...'" ></textarea>
-
+        <textarea  formControlName="content"  id="" cols="30" rows="4" placeholder="Article Content." class="form-control m-1" ></textarea>
+        <div *ngIf="content.invalid && content.touched">
+            <small *ngIf="content.errors?.['required']" class="text-danger m-2">Content is required.</small>
         </div>
+    
 
-        <button  class="btn btn-dark form-control m-1">create</button>
+        <button type="submit" class="btn btn-dark form-control m-1" [disabled]="articleForm.invalid">Publish</button>
 
-
+    </form>
     </div>
 
 </div>
