@@ -11,10 +11,17 @@ export class ArticleService {
   private http = inject(HttpClient);
 
   private addArticleUrl = baseUrl + "article/add";
+  private getArticleUrl = baseUrl + "article/getbyid/";
+
+
 
   constructor() { }
 
   addArticle(form: FormData): Observable<Article>  {
     return this.http.post<Article>(this.addArticleUrl, form)
+  }
+
+  getArticle(id: string): Observable<Article> {
+    return this.http.get<Article>(this.getArticleUrl + id);
   }
 }

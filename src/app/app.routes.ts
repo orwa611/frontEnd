@@ -23,6 +23,7 @@ export const routes: Routes = [
     { path: 'login' , component: LoginComponent, canActivate:[authGuardDisconnected]},
     { path: 'register' , component: RegisterComponent, canActivate:[authGuardDisconnected]},
 
+    { path: '404' , component: NotFoundComponent},
     { path: '**' , component: NotFoundComponent},
 
 
