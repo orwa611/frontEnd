@@ -26,6 +26,7 @@
         <textarea  formControlName="content"  id="" cols="30" rows="4" placeholder="Article Content." class="form-control m-1" ></textarea>
         <div *ngIf="content.invalid && content.touched">
             <small *ngIf="content.errors?.['required']" class="text-danger m-2">Content is required.</small>
+            <small *ngIf="content.errors?.['minlength']" class="text-danger m-2">Content should be at least 500 caracters.</small>
         </div>
     
 

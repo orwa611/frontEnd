@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { baseUrl } from '../../constants/constants';
 import { Observable } from 'rxjs';
 import { Article } from '../interfaces/article';
+import { ArticlesResponse } from '../interfaces/articles-response';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,8 @@ export class ArticleService {
 
   private addArticleUrl = baseUrl + "article/add";
   private getArticleUrl = baseUrl + "article/getbyid/";
+  private getArticlesUrl = baseUrl + "article/all";
+  
 
 
 
@@ -23,5 +26,9 @@ export class ArticleService {
 
   getArticle(id: string): Observable<Article> {
     return this.http.get<Article>(this.getArticleUrl + id);
+  }
+  
+  getArticles(p: number, l: number = 10): Observable<ArticlesResponse> {
+    return this.http.get<ArticlesResponse>(this.getArticlesUrl+'?page=' + p + '&limit=' + l);
   }
 }

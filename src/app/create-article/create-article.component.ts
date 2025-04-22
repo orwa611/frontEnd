@@ -25,7 +25,7 @@ private router = inject(Router);
   ngOnInit(): void {
     this.articleForm = new FormGroup({
       title: new FormControl('', Validators.required),
-      content: new FormControl('', Validators.required),
+      content: new FormControl('', [Validators.required, Validators.minLength(500)]),
       tag: new FormControl('')
     });
   }
@@ -53,7 +53,7 @@ private router = inject(Router);
   removeTag(val: string) {
     this.tags = this.tags.filter((tag) => tag !=  val);
   }
-  addArticle() {
+  addArticle() { 
     if (this.articleForm.valid) {
       const fd = new FormData()
       fd.append('image',this.image)

@@ -1,3 +1,6 @@
 <app-cover></app-cover>
-  
-<app-blog-list></app-blog-list>
+@if (isLoading) {
+    <p>Loading.../p>
+} @else {
+    <app-blog-list [articles]="parentArticles"></app-blog-list>
+}

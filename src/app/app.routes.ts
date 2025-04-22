@@ -19,7 +19,7 @@ export const routes: Routes = [
     { path: 'about' , component: AboutComponent},
 
     { path: 'privacy' , component: PrivacyComponent},
-    { path: 'author' , component: AuthorComponent, canActivate:[authGuardConnected]},
+    { path: 'author/:id' , component: AuthorComponent, canActivate:[authGuardConnected]},
     { path: 'login' , component: LoginComponent, canActivate:[authGuardDisconnected]},
     { path: 'register' , component: RegisterComponent, canActivate:[authGuardDisconnected]},
 
