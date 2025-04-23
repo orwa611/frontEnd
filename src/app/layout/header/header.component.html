@@ -34,7 +34,7 @@
                 <a class="nav-link" routerLink="/myAccount">My Account</a>
               </li>
               <app-logout></app-logout>
-              <li class="nav-item @@archive">
+              <li *ngIf="isLoggedIn" class="nav-item @@archive">
                 <a class="nav-link bg-primary" routerLink="/create"><span class="text-light">Add Article</span></a>
               </li>
             </ul>
