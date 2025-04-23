@@ -33,7 +33,7 @@
             <div class="card-footer border-top-0 bg-transparent p-0">
               <ul class="card-meta list-inline">
                 <li class="list-inline-item mt-2">
-                  <a routerLink="author/{{article.author._id}}" class="card-meta-author" title="Read all posts by - {{article.author.name}} {{article.author.lastname}}">
+                  <a routerLink="../author/{{article.author._id}}" class="card-meta-author" title="Read all posts by - {{article.author.name}} {{article.author.lastname}}">
                     <img class="w-auto" [src]="getImage(article.author.image)"  width="26" height="26"> by <span>{{article.author.name}}</span>
                   </a>
                 </li>
