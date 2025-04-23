@@ -5,4 +5,5 @@ export interface Author {
     email: string;
     image: string;
     about: string | undefined;
+    publishedPosts: number;
 }
