@@ -10,9 +10,14 @@ import { baseUrl } from '../../constants/constants';
 export class MyAccountService {
   private http = inject(HttpClient);
   private accountUrl = baseUrl + "author/account";
+  private authorUrl = baseUrl + "author/id/";
   constructor() { }
 
   getAccount(): Observable<Author> {
     return this.http.get<Author>(this.accountUrl);
+  }
+
+  getAuthor(id: string): Observable<Author> {
+    return this.http.get<Author>(this.authorUrl + id);
   }
 }
