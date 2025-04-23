@@ -16,6 +16,7 @@ export const routes: Routes = [
     { path: 'home' , component: HomeComponent},
     { path: 'article/:id' , component: DetailComponent},
     { path: 'create' , component: CreateArticleComponent, canActivate:[authGuardConnected]},
+    { path: 'update/:id' , component: CreateArticleComponent, canActivate:[authGuardConnected]},
     { path: 'about' , component: AboutComponent},
 
     { path: 'privacy' , component: PrivacyComponent},

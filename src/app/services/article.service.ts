@@ -15,6 +15,7 @@ export class ArticleService {
   private getArticleUrl = baseUrl + "article/getbyid/";
   private getArticlesUrl = baseUrl + "article/all";
   private getArticlesByAuthorUrl = baseUrl + "article/author/";
+  private deleteArticleUrl = baseUrl + "article/delete/";
   
 
 
@@ -35,5 +36,9 @@ export class ArticleService {
 
   getArticlesByAuthorId(id: string): Observable<Article[]> {
     return this.http.get<Article[]>(this.getArticlesByAuthorUrl + id);
+  }
+  
+  deleteArticle(id: string): Observable<Article> {
+    return this.http.delete<Article>(this.deleteArticleUrl + id);
   }
 }
