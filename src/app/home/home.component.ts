@@ -13,17 +13,37 @@ import { Article } from '../interfaces/article';
 export class HomeComponent {
   private page = 1;
   private articleService = inject(ArticleService)
+  private totalCount = 0;
   isLoading: boolean = false
   parentArticles: Array<Article> = [];
 
-  ngOnInit(): void {
+  loadArticles() {
     this.isLoading = true
     this.articleService.getArticles(this.page).subscribe((value)=>{
+      this.page++;
       this.isLoading = false
-      this.parentArticles = value.articles;
+      value.articles.forEach((elem) => {
+        this.parentArticles.push(elem);
+      })
+      
+      this.totalCount = value.totalArticles
       });
   }
 
+  ngOnInit(): void {
+    this.isLoading = true
+    this.loadArticles()
+  }
+  @HostListener("window:scroll", [])
+  onScroll(): void {
+    
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 500) {
+      if(this.parentArticles.length < this.totalCount && !this.isLoading) {
+        this.loadArticles();
+      }
+    }
+    }
+    
 
 }
 
