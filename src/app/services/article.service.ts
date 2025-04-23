@@ -14,6 +14,7 @@ export class ArticleService {
   private addArticleUrl = baseUrl + "article/add";
   private getArticleUrl = baseUrl + "article/getbyid/";
   private getArticlesUrl = baseUrl + "article/all";
+  private getArticlesByAuthorUrl = baseUrl + "article/author/";
   
 
 
@@ -30,5 +31,9 @@ export class ArticleService {
   
   getArticles(p: number, l: number = 10): Observable<ArticlesResponse> {
     return this.http.get<ArticlesResponse>(this.getArticlesUrl+'?page=' + p + '&limit=' + l);
+  }
+
+  getArticlesByAuthorId(id: string): Observable<Article[]> {
+    return this.http.get<Article[]>(this.getArticlesByAuthorUrl + id);
   }
 }

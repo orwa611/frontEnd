@@ -1,3 +1,5 @@
+import { Article } from "./article";
+
 export interface Author {
     _id: string;
     name: string;
@@ -6,4 +8,5 @@ export interface Author {
     image: string;
     about: string | undefined;
     publishedPosts: number;
+    articles: Article[];
 }

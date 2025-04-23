@@ -4,10 +4,13 @@ import { Author } from '../interfaces/author';
 import { baseUrl, getImageUrl } from '../../constants/constants';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, of } from 'rxjs';
+import { ArticleService } from '../services/article.service';
+import { Article } from '../interfaces/article';
+import { BlogListComponent } from '../home/blog-list/blog-list.component';
 
 @Component({
   selector: 'app-author',
-  imports: [],
+  imports: [BlogListComponent],
   templateUrl: './author.component.html',
   styleUrl: './author.component.css'
 })
@@ -15,7 +18,9 @@ export class AuthorComponent implements OnInit {
   private myAccountService = inject(MyAccountService);
   private activatedRoute = inject(ActivatedRoute);
   private router = inject(Router);
+  private articleService = inject(ArticleService)
   author?: Author
+  articles: Article[] = [];
   isLoading: boolean = false;
   ngOnInit(): void {
     
@@ -36,6 +41,7 @@ export class AuthorComponent implements OnInit {
   getAccount() {
     this.isLoading = true;
     this.myAccountService.getAccount().subscribe((value: Author)=>{
+      this.articles = value.articles;
       this.isLoading = false;
       this.author = value;
     });
@@ -52,7 +58,9 @@ export class AuthorComponent implements OnInit {
       .subscribe((value: Author)=>{
         this.isLoading = false;
         this.author = value
-        console.log(value)
+      })
+      this.articleService.getArticlesByAuthorId(id).subscribe((value: Article[])=>{
+        this.articles = value;
       })
     }
   }
