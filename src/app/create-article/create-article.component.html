@@ -1,12 +1,12 @@
 <div class="container mt-4">
 
 
-    <h2 class="text-center"> Create article  </h2>
+    <h2 class="text-center"><span *ngIf="!isEdit">Create</span><span *ngIf="isEdit">Edit</span> article  </h2>
    
     <div class="col-6 mx-auto">
-        <div *ngIf="success"  class="p-3 mb-2 bg-success text-white">Article created successfully !</div>
-        <div *ngIf="error"  class="p-3 mb-2 bg-danger text-white">Article not created!</div>
-        <form [formGroup]="articleForm" (ngSubmit)="addArticle()">
+        <div *ngIf="success"  class="p-3 mb-2 bg-success text-white">Article <span *ngIf="!isEdit">Created</span><span *ngIf="isEdit">Edited</span> successfully !</div>
+        <div *ngIf="error"  class="p-3 mb-2 bg-danger text-white">Article not <span *ngIf="!isEdit">Created</span><span *ngIf="isEdit">Edited</span></div>
+        <form [formGroup]="articleForm" (ngSubmit)="isEdit ? editArticle() : addArticle()">
 
             <input formControlName="title" id="title" type="text" class="form-control m-1" placeholder="Title" required>
             <div *ngIf="title.invalid && title.touched">
@@ -30,7 +30,7 @@
         </div>
     
 
-        <button type="submit" class="btn btn-dark form-control m-1" [disabled]="articleForm.invalid">Publish</button>
+        <button type="submit" class="btn btn-dark form-control m-1" [disabled]="articleForm.invalid"><span *ngIf="!isEdit">Publish</span><span *ngIf="isEdit">Edit</span></button>
 
     </form>
     </div>

@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { authGuardConnected, authGuardDisconnected } from './guards/auth.guard';
+import { EditAuthorComponent } from './author/edit-author/edit-author.component';
 
 export const routes: Routes = [
 

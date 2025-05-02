@@ -1,27 +1,36 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { MyAccountService } from '../services/my-account.service';
 import { Author } from '../interfaces/author';
-import { baseUrl, getImageUrl } from '../../constants/constants';
+import { getImageUrl } from '../../constants/constants';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, of } from 'rxjs';
 import { ArticleService } from '../services/article.service';
 import { Article } from '../interfaces/article';
 import { BlogListComponent } from '../home/blog-list/blog-list.component';
+import { EditAuthorComponent } from "./edit-author/edit-author.component";
+import { InfoAuthorComponent } from './info-author/info-author.component';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-author',
-  imports: [BlogListComponent],
+  imports: [BlogListComponent, EditAuthorComponent, InfoAuthorComponent, NgIf],
   templateUrl: './author.component.html',
   styleUrl: './author.component.css'
 })
 export class AuthorComponent implements OnInit {
+
+
   private myAccountService = inject(MyAccountService);
   private activatedRoute = inject(ActivatedRoute);
   private router = inject(Router);
   private articleService = inject(ArticleService)
+
+
   author?: Author
   articles: Article[] = [];
   isLoading: boolean = false;
+  isEdit: boolean = false;
+
   ngOnInit(): void {
     
     if (this.activatedRoute.routeConfig?.path?.includes('author')) {
@@ -32,6 +41,9 @@ export class AuthorComponent implements OnInit {
       this.router.navigate(['404'])
     }
 
+  }
+  get name() {
+    return
   }
   get image() {
    return getImageUrl(this.author?.image);
@@ -64,5 +76,12 @@ export class AuthorComponent implements OnInit {
       })
     }
   }
-  
+  toggleEdit() {
+    this.isEdit = !this.isEdit;
+    }
+
+  getEditedAuthor(event: Author) {
+      this.author = event;
+      this.isEdit = false;
+  }
 }

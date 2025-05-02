@@ -2,25 +2,23 @@
   @if (isLoading) {
     <p>Loading ...</p>
   } @else {
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-10">
-          <div class="row g-4 g-lg-5 text-center text-lg-start justify-content-center justify-content-lg-start">
-            <div class="col-lg-3 col-md-4 col-sm-5 col-6">
-              <img class="img-fluid rounded" src="{{image}}" alt="{{author?.name}}" width="250" height="250">
-            </div>
-            <div class="col-lg-9 col-md-12">
-              <p class="mb-2"><span class="fw-bold text-black"> {{author?.publishedPosts}} </span> Published posts</p>
-              <h1 class="h3 text-dark mb-3"> {{author?.name}} </h1>
-              <div class="content">
-                <p>{{author?.about}}</p>
-                <p>Follow him <a target="_blank" href="https://twitter.com/thomas-macaulay">on Twitter</a>.</p>
-              </div>
-            </div>
-          </div>
-        </div>
+    @if (isEdit) {
+    <app-edit-author (sendAuthorEvent)="getEditedAuthor($event)" [author]="author" [image]="image"></app-edit-author>
+  } @else {
+    <app-info-author [author]="author" [image]="image"></app-info-author>
+  }
+   <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <button class="transparent-btn" (click)="toggleEdit()">
+          <span class="btn btn-sm btn-secondary" *ngIf="!isEdit">Edit account</span>
+          <span class="btn btn-sm btn-danger" *ngIf="isEdit">Discard changes</span>
+        </button>
       </div>
-    </div>
+    </div> 
+    
+   </div>
+    
   }
     
   </section>

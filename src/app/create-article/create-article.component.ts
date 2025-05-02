@@ -3,7 +3,7 @@ import { ArticleService } from '../services/article.service';
 import { Article } from '../interfaces/article';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgFor, NgIf } from '@angular/common';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, of } from 'rxjs';
 
 @Component({
@@ -15,6 +15,7 @@ import { catchError, of } from 'rxjs';
 export class CreateArticleComponent implements OnInit {
 private articleService = inject(ArticleService);
 private router = inject(Router);
+private activatedRoute = inject(ActivatedRoute);
 
   articleForm!: FormGroup
   tags: Array<string> = [];
@@ -28,6 +29,9 @@ private router = inject(Router);
       content: new FormControl('', [Validators.required, Validators.minLength(500)]),
       tag: new FormControl('')
     });
+    if(this.isEdit) {
+      this.getArticleToEdit()
+    }
   }
 
   get title() {
@@ -74,5 +78,40 @@ private router = inject(Router);
       })
     }
   }
-
+  get isEdit(): boolean {
+    return this.activatedRoute.routeConfig?.path?.includes('update') == true;
+  }
+  getArticleToEdit() {
+    let id = this.activatedRoute.snapshot.paramMap.get('id');
+    if (id !== null) {
+      this.articleService.getArticle(id).subscribe((value : Article)=>{
+        this.title.setValue(value.title)
+        this.tags = value.tags
+        this.content.setValue(value.content)
+      })
+    }
+  }
+  editArticle() {
+    let id = this.activatedRoute.snapshot.paramMap.get('id');
+    if (this.articleForm.valid && id !== null) {
+      const fd = new FormData()
+      fd.append('image',this.image)
+      fd.append('title', this.title.value)
+      fd.append('content', this.content.value)
+      fd.append('tag', this.tags.toString())
+     
+      this.articleService.editArticle(id, fd)
+      .pipe(catchError((error, _) => {
+        this.success = false;
+        this.error = true;
+        return of();
+      }))
+      .subscribe((value: Article)=>{
+        this.articleForm.reset();
+        this.image = null;
+        this.success = true;
+        this.error = false;
+      })
+    }
+  }
 }
