@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { MyAccountService } from '../services/my-account.service';
 import { Author } from '../interfaces/author';
 import { getImageUrl } from '../../constants/constants';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { catchError, of } from 'rxjs';
 import { ArticleService } from '../services/article.service';
 import { Article } from '../interfaces/article';
@@ -13,7 +13,7 @@ import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-author',
-  imports: [BlogListComponent, EditAuthorComponent, InfoAuthorComponent, NgIf],
+  imports: [BlogListComponent, EditAuthorComponent, InfoAuthorComponent, NgIf, RouterLink],
   templateUrl: './author.component.html',
   styleUrl: './author.component.css'
 })

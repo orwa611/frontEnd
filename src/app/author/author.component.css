@@ -2,3 +2,7 @@
     background-color: transparent;
     border: none;
 }
+.btn-xs {
+    padding: 8px 6px;
+    font-size: small;
+}

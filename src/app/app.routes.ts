@@ -10,6 +10,7 @@ import { RegisterComponent } from './register/register.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { authGuardConnected, authGuardDisconnected } from './guards/auth.guard';
 import { EditAuthorComponent } from './author/edit-author/edit-author.component';
+import { ChangePasswordComponent } from './author/change-password/change-password.component';
 
 export const routes: Routes = [
 
@@ -25,6 +26,7 @@ export const routes: Routes = [
     { path: 'myAccount' , component: AuthorComponent, canActivate:[authGuardConnected]},
     { path: 'login' , component: LoginComponent, canActivate:[authGuardDisconnected]},
     { path: 'register' , component: RegisterComponent, canActivate:[authGuardDisconnected]},
+    { path: 'change-password' , component: ChangePasswordComponent, canActivate:[authGuardConnected]},
 
     { path: '404' , component: NotFoundComponent},
     { path: '**' , component: NotFoundComponent},

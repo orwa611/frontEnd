@@ -11,9 +11,10 @@
     <div class="row justify-content-center">
       <div class="col-lg-10">
         <button class="transparent-btn" (click)="toggleEdit()">
-          <span class="btn btn-sm btn-secondary" *ngIf="!isEdit">Edit account</span>
-          <span class="btn btn-sm btn-danger" *ngIf="isEdit">Discard changes</span>
+          <span class="btn btn-xs btn-primary" *ngIf="!isEdit">Edit account</span>
+          <span class="btn btn-xs btn-danger" *ngIf="isEdit">Discard changes</span>
         </button>
+        <a routerLink="/change-password" class="btn btn-xs btn-secondary" *ngIf="!isEdit">Change password</a>
       </div>
     </div> 
     
